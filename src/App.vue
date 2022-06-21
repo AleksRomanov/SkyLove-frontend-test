@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-
+    <h1>!!!!!!!!</h1>
+    <hr>
   </div>
 </template>
 
@@ -8,9 +9,7 @@
 
 export default {
   name: 'App',
-  components: {
-
-  }
+  components: {}
 }
 </script>
 
