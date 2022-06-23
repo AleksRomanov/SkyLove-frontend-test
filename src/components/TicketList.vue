@@ -2,7 +2,8 @@
   <div>
     <ul>
       <TicketItem
-          v-for="(idx) in tickets" :key="idx"
+          v-for="(ticket) in tickets" :key="ticket"
+          v-bind:ticket="ticket"
       />
     </ul>
   </div>
@@ -18,3 +19,11 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+</style>
