@@ -1,11 +1,12 @@
 <template>
   <li>
-    <span>
+    <span v-bind:class="{done: ticket.completed}">
       <input type="checkbox">
-      <strong>{{ ticket.user.ticket_number }}</strong>
+      <strong>{{ ticket.user.email }}</strong>
       {{ ticket.user.name }}
     </span>
-    <button>&times;</button>
+    <button class="rm"
+            v-on:click="$emit('remove-ticket', ticket.ticket_number)">&times;</button>
   </li>
 </template>
 
@@ -14,7 +15,7 @@ export default {
   props: {
     ticket: {
       type: Object,
-      required: true
+      required: true,
     }
   }
 }
@@ -27,5 +28,22 @@ li {
   justify-content: space-between;
   padding: .5rem 2rem;
   margin-bottom: 1rem;
+  width: 500px;
+  border-radius: 5px;
+}
+
+.done {
+  text-decoration: line-through;
+}
+
+.rm {
+  background: red;
+  color: #fff;
+  border-radius: 50%;
+  font-weight: bold;
+}
+
+input {
+  margin-right: 1rem;
 }
 </style>

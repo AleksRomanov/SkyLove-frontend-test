@@ -1,22 +1,17 @@
 <template>
   <div id="app">
-    <h1>Hello Tickets</h1>
+    <h1>Тикеты</h1>
     <hr>
     <TicketForm/>
     <TicketList
-      v-bind:tickets="tickets"
+        v-bind:tickets="tickets"
+        @remove-ticket="removeTicket"
     />
-    <!--    <h2>{{todosCount}}</h2>-->
-    <!--    <div class="todo" v-for="todo in allTodos" :key="todo.name"-->
-    <!--         v-bind:todo="todo">-->
-    <!--      <h2>{{ todo.name }}</h2>-->
-    <!--    </div>-->
   </div>
 </template>
 
 <script>
 import TicketList from '@/components/TicketList'
-// import {mapGetters, mapActions} from 'vuex'
 import TicketForm from "@/components/TicketForm";
 
 export default {
@@ -35,6 +30,7 @@ export default {
           "status": 0,
           "priority": 2,
           "ticket_number": 1,
+          "completed": false
         },
         {
           "user": {
@@ -47,6 +43,7 @@ export default {
           "status": 1,
           "priority": 3,
           "ticket_number": 2,
+          completed: false
         },
         {
           "user": {
@@ -59,16 +56,16 @@ export default {
           "status": 3,
           "priority": 5,
           "ticket_number": 3,
+          "completed": false
         },
       ]
     }
   },
-  // computed: mapGetters(["allTodos", "todosCount"]),
-  // methods: mapActions(['fetchTodos']),
-  // async mounted() {
-  //   // await this.$store.dispatch("fetchTodos")
-  //   await this.fetchTodos();
-  // },
+  methods: {
+    removeTicket(ticket_number) {
+      this.tickets = this.tickets.filter(t => t.ticket_number !== ticket_number)
+    }
+  },
   components: {
     TicketForm,
     TicketList
@@ -84,20 +81,7 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin: 60px auto;
-  width: 400px;
-}
-
-.ticket {
   border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-bottom: 1rem;
 }
 
-.ticket ul {
-  padding: 0;
-  display: flex;
-  align-content: center;
-  justify-content: center;
-  list-style: none;
-}
 </style>
