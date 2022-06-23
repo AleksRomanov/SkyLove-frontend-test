@@ -1,9 +1,10 @@
 <template>
   <li>
-    <span v-bind:class="{done: ticket.completed}">
-      <input type="checkbox">
-      <strong>{{ ticket.user.email }}</strong>
+    <span>
       {{ ticket.user.name }}
+      <strong>{{ ticket.user.email }}</strong>
+      <img src="" alt="" srcset="">
+
     </span>
     <button class="rm"
             v-on:click="$emit('remove-ticket', ticket.ticket_number)">&times;</button>
@@ -25,9 +26,11 @@ export default {
 li {
   border: 1px solid #ccc;
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  justify-content: center;
   padding: .5rem 2rem;
   margin-bottom: 1rem;
+  margin-right: 1rem;
   width: 500px;
   border-radius: 5px;
 }

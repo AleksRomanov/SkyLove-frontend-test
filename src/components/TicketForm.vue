@@ -1,9 +1,9 @@
 <template>
-  <form>
-    <label for="name"></label>
-    <input type="text" id="name" placeholder="name">
-    <button type="submit">Create</button>
-    <!--    <input type="text" placeholder="email" v-model="email">-->
+  <form @submit.prevent="onSubmit">
+<!--    <input type="text" placeholder="name" v-model="user">-->
+<!--    <input type="text" placeholder="email" v-model="email">-->
+<!--    <button type="submit">Create</button>-->
+
     <!--    <input type="text" placeholder="message" v-model="message">-->
     <!--    <input type="text" placeholder="message Type" v-model="messageType">-->
     <!--    <input type="text" placeholder="priority" v-model="priority">-->
@@ -13,38 +13,35 @@
   </form>
 </template>
 
-<!--<script>-->
-<!--// import {mapMutations} from 'vuex'-->
+<script>
 
-<!--export default {-->
-<!--  // data() {-->
-<!--  //   return {-->
-<!--  //     name: '',-->
-<!--  //     email: '',-->
-<!--  //     message: '',-->
-<!--  //     messageType: '',-->
-<!--  //     priority: '',-->
-<!--  //     status: '',-->
-<!--  //   }-->
-<!--  // }-->
-<!--//   methods: {-->
-<!--//     ...mapMutations(['createTodo']),-->
-<!--//   //   submit() {-->
-<!--//   //   //   this.createTodo({-->
-<!--//   //   //     name: this.name,-->
-<!--//   //   //     email: this.email,-->
-<!--//   //   //     // message: this.message,-->
-<!--//   //   //     // messageType: this.messageType,-->
-<!--//   //   //     // priority: this.priority,-->
-<!--//   //   //     // status: this.status-->
-<!--//   //   //   })-->
-<!--//   //   // }-->
-<!--//   // }-->
-<!--}-->
-<!--</script>-->
+export default {
+  data() {
+    return {
+      user: '',
+      email: ''
+    }
+  },
+  methods: {
+    onSubmit() {
+      if (this.user.trim()) {
+        const newTicket = {
+          ticket_number: Date.now(),
+          user: this.user,
+          // completed: false
+        }
+        this.$emit('add-ticket', newTicket)
+        this.user = ''
+      }
+    }
+  }
+}
+</script>
 
 <style scoped>
 form {
+  margin: 0 auto;
+  width: 400px;
   display: flex;
   justify-content: center;
   margin-bottom: 10px;

@@ -2,7 +2,10 @@
   <div id="app">
     <h1>Тикеты</h1>
     <hr>
-    <TicketForm/>
+    <button type="submit">Create</button>
+    <TicketForm
+        @add-ticket="addTicket"
+    />
     <TicketList
         v-bind:tickets="tickets"
         @remove-ticket="removeTicket"
@@ -64,6 +67,9 @@ export default {
   methods: {
     removeTicket(ticket_number) {
       this.tickets = this.tickets.filter(t => t.ticket_number !== ticket_number)
+    },
+    addTicket(user) {
+      this.tickets.push(user)
     }
   },
   components: {

@@ -21,7 +21,7 @@ export default {
   methods: {
     removeTicket(ticket_number) {
       this.$emit('remove-ticket', ticket_number)
-    }
+    },
   }
 }
 </script>
@@ -29,9 +29,10 @@ export default {
 <style scoped>
   ul {
     display: flex;
+    flex-wrap: wrap;
     align-content: center;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     list-style: none;
     margin: 0;
     padding: 0;
