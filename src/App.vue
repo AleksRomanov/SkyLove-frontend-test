@@ -1,28 +1,29 @@
 <template>
   <div id="app">
-    <div class="todo" v-for="todo in allTodos" :key="todo.title"
+    <TodoForm/>
+    <h1>{{todosCount}}</h1>
+    <div class="todo" v-for="todo in allTodos" :key="todo.name"
          v-bind:todo="todo">
-      <h2>{{ todo.title }}</h2>
+      <h2>{{ todo.name }}</h2>
     </div>
   </div>
 </template>
 
 <script>
 // import TicketList from '@/components/TicketList'
-import {mapGetters} from 'vuex'
+import {mapGetters, mapActions} from 'vuex'
+import TodoForm from "@/components/TodoForm";
 
 export default {
   name: 'App',
-  computed: mapGetters(["allTodos"]),
-  // computed: {
-  //   allTodo() {
-  //     return this.$store.getters.allTodo;
-  //   }
-  // },
+  computed: mapGetters(["allTodos", "todosCount"]),
+  methods: mapActions(['fetchTodos']),
   async mounted() {
-    await this.$store.dispatch("fetchTodos")
+    // await this.$store.dispatch("fetchTodos")
+    await this.fetchTodos();
   },
   components: {
+    TodoForm
     // TicketList
   }
 }
