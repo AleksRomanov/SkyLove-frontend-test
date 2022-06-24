@@ -2,8 +2,9 @@
   <div>
     <ul>
       <TicketItem
-          v-for="(ticket) in tickets" :key="ticket"
+          v-for="(ticket, t) in tickets" :key="ticket"
           v-bind:ticket="ticket"
+          v-bind:index="t"
           v-on:remove-ticket="removeTicket"
       />
     </ul>
@@ -12,7 +13,6 @@
 
 <script>
 import TicketItem from '@/components/TicketItem'
-
 export default {
   props: ['tickets'],
   components: {
@@ -28,7 +28,8 @@ export default {
 
 <style scoped>
   ul {
-    display: flex;
+    /*display: flex;*/
+    display: block;
     flex-wrap: wrap;
     align-content: center;
     align-items: center;

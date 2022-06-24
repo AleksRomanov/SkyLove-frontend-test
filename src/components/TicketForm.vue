@@ -1,9 +1,8 @@
 <template>
   <form @submit.prevent="onSubmit">
-<!--    <input type="text" placeholder="name" v-model="user">-->
-<!--    <input type="text" placeholder="email" v-model="email">-->
-<!--    <button type="submit">Create</button>-->
-
+    <!--    <input type="text" placeholder="name" v-model="user">-->
+    <!--    <input type="text" placeholder="email" v-model="email">-->
+    <!--    <button type="submit">Create</button>-->
     <!--    <input type="text" placeholder="message" v-model="message">-->
     <!--    <input type="text" placeholder="message Type" v-model="messageType">-->
     <!--    <input type="text" placeholder="priority" v-model="priority">-->

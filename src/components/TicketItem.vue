@@ -1,13 +1,14 @@
 <template>
   <li>
     <span>
+      {{ index + 1 }}
       {{ ticket.user.name }}
       <strong>{{ ticket.user.email }}</strong>
       <img src="" alt="" srcset="">
-
     </span>
     <button class="rm"
-            v-on:click="$emit('remove-ticket', ticket.ticket_number)">&times;</button>
+            v-on:click="$emit('remove-ticket', ticket.ticket_number)">&times;
+    </button>
   </li>
 </template>
 
@@ -17,7 +18,8 @@ export default {
     ticket: {
       type: Object,
       required: true,
-    }
+    },
+    index: Number
   }
 }
 </script>
