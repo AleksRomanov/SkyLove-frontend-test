@@ -22,6 +22,9 @@ export default {
     removeTicket(ticket_number) {
       this.$emit('remove-ticket', ticket_number)
     },
+    addTicket(user) {
+      this.tickets.push(user)
+    }
   }
 }
 </script>

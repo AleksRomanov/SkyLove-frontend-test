@@ -70,7 +70,7 @@ export default {
   },
   methods: {
     removeTicket(ticket_number) {
-      this.tickets = this.tickets.filter(t => t.ticket_number !== ticket_number)
+      this.tickets = this.tickets.filter(i => i.ticket_number !== ticket_number)
     },
     addTicket(user) {
       this.tickets.push(user)

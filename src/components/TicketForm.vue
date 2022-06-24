@@ -8,7 +8,6 @@
     <!--    <input type="text" placeholder="message Type" v-model="messageType">-->
     <!--    <input type="text" placeholder="priority" v-model="priority">-->
     <!--    <input type="text" placeholder="status" v-model="status">-->
-
     <!--    <hr>-->
   </form>
 </template>
@@ -23,13 +22,12 @@ export default {
   },
   methods: {
     onSubmit() {
-      console.log('SUBMIT', this.title)
       if (this.user.trim()) {
         const newTicket = {
           ticket_number: Date.now(),
           ticket: this.ticket,
           user: this.user,
-          completed: false
+          // completed: false
         }
         this.$emit('add-ticket', newTicket)
         this.user = ''
