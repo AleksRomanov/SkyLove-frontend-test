@@ -1,12 +1,13 @@
 <template>
   <li>
     {{ index + 1 }}
-    <span class="ticket-user__data">
-         <img width="45" height="45" src="https://lh3.googleusercontent.com/ogw/ADGmqu9mwjd_DnKM_J5VCm0fPeUuIA1p-MU6rR7Fi0wV=s192-c-mo" alt="" />
-      {{ ticket.user.name }}
+    <img width="45" height="45" src="https://lh3.googleusercontent.com/ogw/ADGmqu9mwjd_DnKM_J5VCm0fPeUuIA1p-MU6rR7Fi0wV=s192-c-mo" alt=""/>
+    <div class="ticket-user__data">
+      <span>{{ ticket.user.name }}</span>
       <strong>{{ ticket.user.email }}</strong>
 
-    </span>
+
+    </div>
     <button class="rm"
             v-on:click="$emit('remove-ticket', ticket.ticket_number)">&times;
     </button>
@@ -52,6 +53,11 @@ img {
   display: flex;
   align-items: center;
   margin-right: 1rem;
+  padding: 1rem;
+}
+
+.ticket-user__data span {
+  margin-right: 3rem;
 }
 
 .rm {

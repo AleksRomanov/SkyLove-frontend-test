@@ -1,11 +1,6 @@
 <template>
   <div>
-    <h2>Тикеты</h2>
-    <hr>
-<!--    <button type="submit">Create</button>-->
-    <hr>
     <router-link to="/home">Home</router-link>
-
     <TicketForm
         @add-ticket="addTicket"
     />

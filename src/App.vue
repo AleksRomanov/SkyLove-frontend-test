@@ -16,6 +16,6 @@
   text-align: center;
   color: #2c3e50;
   margin: 60px auto;
-  border: 1px solid #ccc;
+  /*border: 1px solid #ccc;*/
 }
 </style>

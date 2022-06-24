@@ -50,6 +50,7 @@ input {
   display: block;
   width: 400px;
   border: 1px solid #ccc;
+  border: 1px solid #ccc;
   border-radius: 2px;
   box-sizing: border-box;
   padding: 10px;
