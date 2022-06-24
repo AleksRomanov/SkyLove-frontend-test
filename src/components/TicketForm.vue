@@ -1,13 +1,14 @@
 <template>
   <form @submit.prevent="onSubmit">
-    <!--    <input type="text" placeholder="name" v-model="user">-->
+    <input type="text" v-model="user">
+    <button type="submit">Create</button>
     <!--    <input type="text" placeholder="email" v-model="email">-->
     <!--    <button type="submit">Create</button>-->
     <!--    <input type="text" placeholder="message" v-model="message">-->
     <!--    <input type="text" placeholder="message Type" v-model="messageType">-->
     <!--    <input type="text" placeholder="priority" v-model="priority">-->
     <!--    <input type="text" placeholder="status" v-model="status">-->
-    <!--    <button type="submit">Cancel</button>-->
+
     <!--    <hr>-->
   </form>
 </template>
@@ -17,17 +18,18 @@
 export default {
   data() {
     return {
-      user: '',
-      email: ''
+      user: ''
     }
   },
   methods: {
     onSubmit() {
+      console.log('SUBMIT', this.title)
       if (this.user.trim()) {
         const newTicket = {
           ticket_number: Date.now(),
+          ticket: this.ticket,
           user: this.user,
-          // completed: false
+          completed: false
         }
         this.$emit('add-ticket', newTicket)
         this.user = ''

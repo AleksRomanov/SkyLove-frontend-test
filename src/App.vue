@@ -1,10 +1,8 @@
-
-
 <template>
   <div id="app">
-    <h1>Тикеты</h1>
+    <h1>Приложение "Тикеты"</h1>
     <hr>
-    <a href="/tickets">TICKETS!!!</a>
+    <router-link to="/tickets">TICKETS!!!</router-link>
     <router-view/>
   </div>
 </template>

@@ -2,9 +2,9 @@
   <div>
     <ul>
       <TicketItem
-          v-for="(ticket, t) in tickets" :key="ticket"
+          v-for="(ticket, i) in tickets" :key="ticket"
           v-bind:ticket="ticket"
-          v-bind:index="t"
+          v-bind:index="i"
           v-on:remove-ticket="removeTicket"
       />
     </ul>

@@ -4,7 +4,7 @@
       {{ index + 1 }}
       {{ ticket.user.name }}
       <strong>{{ ticket.user.email }}</strong>
-      <img src="" alt="" srcset="">
+      <img src="public/favicon.ico" alt="">
     </span>
     <button class="rm"
             v-on:click="$emit('remove-ticket', ticket.ticket_number)">&times;

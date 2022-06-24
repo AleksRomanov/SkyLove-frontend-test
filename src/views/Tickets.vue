@@ -2,20 +2,26 @@
   <div>
     <h2>Тикеты</h2>
     <hr>
-    <button type="submit">Create</button>
+<!--    <button type="submit">Create</button>-->
+    <hr>
+    <router-link to="/home">Home</router-link>
+
     <TicketForm
         @add-ticket="addTicket"
     />
     <TicketList
+        v-if="tickets.length"
         v-bind:tickets="tickets"
         @remove-ticket="removeTicket"
     />
+    <p v-else>No Tickets!</p>
   </div>
 </template>
 
 <script>
 import TicketList from '@/components/TicketList'
 import TicketForm from "@/components/TicketForm";
+import Loader from "@/components/Loader";
 
 export default {
   name: 'App',
@@ -32,8 +38,7 @@ export default {
           "subject": "Оплата",
           "status": 0,
           "priority": 2,
-          "ticket_number": 1,
-          "completed": false
+          "ticket_number": 1
         },
         {
           "user": {
@@ -45,8 +50,7 @@ export default {
           "subject": "Оплата",
           "status": 1,
           "priority": 3,
-          "ticket_number": 2,
-          completed: false
+          "ticket_number": 2
         },
         {
           "user": {
@@ -58,10 +62,10 @@ export default {
           "subject": "Оплата",
           "status": 3,
           "priority": 5,
-          "ticket_number": 3,
-          "completed": false
+          "ticket_number": 3
         },
-      ]
+      ],
+      loading: true
     }
   },
   methods: {
@@ -74,7 +78,8 @@ export default {
   },
   components: {
     TicketForm,
-    TicketList
+    TicketList,
+    Loader
   }
 }
 </script>
