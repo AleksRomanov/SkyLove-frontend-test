@@ -4,6 +4,7 @@
     <TicketForm
         @add-ticket="addTicket"
     />
+    <Loader v-if="loading"/>
     <TicketList
         v-if="tickets.length"
         v-bind:tickets="tickets"
@@ -19,7 +20,7 @@ import TicketForm from "@/components/TicketForm";
 import Loader from "@/components/Loader";
 
 export default {
-  name: 'App',
+  name: 'Tickets',
   data() {
     return {
       tickets: [
@@ -53,7 +54,7 @@ export default {
             "email": "jeka@gmail.com",
             "avatar": "https://lh3.googleusercontent.com/ogw/ADGmqu9mwjd_DnKM_J5VCm0fPeUuIA1p-MU6rR7Fi0wV=s192-c-mo"
           },
-          "body_subject": "text text",
+          "body_subject": "Тип обращения",
           "subject": "Оплата",
           "status": 3,
           "priority": 5,
@@ -63,11 +64,20 @@ export default {
       loading: true
     }
   },
+  computed: {
+    filteredMessageType() {
+      if (this.filter === 'complaint-user') {
+        return this.tickets
+      }
+    }
+  },
   methods: {
     removeTicket(ticket_number) {
       this.tickets = this.tickets.filter(i => i.ticket_number !== ticket_number)
     },
     addTicket(user) {
+      console.log('LOG')
+      console.log(user)
       this.tickets.push(user)
     }
   },

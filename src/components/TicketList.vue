@@ -24,6 +24,8 @@ export default {
     },
     addTicket(user) {
       this.tickets.push(user)
+      console.log('LLLLOOOGGGGGGG!!!!')
+      console.log(user)
     }
   }
 }
@@ -33,10 +35,10 @@ export default {
   ul {
     /*display: flex;*/
     display: block;
-    flex-wrap: wrap;
-    align-content: center;
-    align-items: center;
-    justify-content: center;
+    /*flex-wrap: wrap;*/
+    /*align-content: center;*/
+    /*align-items: center;*/
+    /*justify-content: center;*/
     list-style: none;
     margin: 0;
     padding: 0;

@@ -7,7 +7,6 @@
   </div>
 </template>
 
-
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -15,7 +14,8 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin: 60px auto;
+  /*background-color: ;*/
+  /*margin: 60px auto;*/
   /*border: 1px solid #ccc;*/
 }
 </style>
