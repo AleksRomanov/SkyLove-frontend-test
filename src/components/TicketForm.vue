@@ -3,16 +3,17 @@
     <h2>Новый тикет</h2>
     <ul>
       <li>
-        <input type="text" id="name" v-model="name">
         <label for="name">Имя:</label>
+        <input type="text" id="name" v-model="name">
+
       </li>
       <li>
-        <input type="text" v-model="user.email">
         <label for="name">Email:</label>
+        <input type="text" v-model="user.email">
       </li>
 
       <li>
-        <label for="name">Имя</label>
+
       </li>
 
       <input type="text" placeholder="message" v-model="user.message">
