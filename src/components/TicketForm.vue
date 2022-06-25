@@ -1,50 +1,63 @@
 <template>
   <form @submit.prevent="onSubmit">
     <h2>Новый тикет</h2>
-    <ul>
-      <li>
-        <label for="name">Имя:</label>
-        <input type="text" id="name" v-model="name">
-
-      </li>
-      <li>
-        <label for="name">Email:</label>
-        <input type="text" v-model="user.email">
-      </li>
-
-      <li>
-
-      </li>
-
-      <input type="text" placeholder="message" v-model="user.message">
-      <input type="text" placeholder="message Type" v-model="user.messageType">
-      <select v-model="filter">
-        <option value="complaint-user">Жалоба на пользователя</option>
-        <option value="complaint-app">Жалоба на приложение</option>
-        <option value="complaint-website">Жалоба на сайт</option>
-        <option value="payment">Оплата</option>
-        <option value="functionality">Функционал</option>
-        <option value="authorization">Авторизация</option>
-        <option value="moderation">Модерация</option>
-        <option value="other">Другое</option>
+    <div class="form-group">
+      <label for="name" class="form-label">Имя:</label>
+      <input
+          id="name"
+          class="form-input"
+          v-model="user.name"
+      >
+    </div>
+    <div class="form-group">
+      <label for="email" class="form-label">Email:</label>
+      <input
+          id="email"
+          class="form-input"
+          v-model="user.email"
+      >
+    </div>
+    <div class="form-group">
+      <label for="message" class="form-label">Сообщение:</label>
+      <input
+          id="message"
+          class="form-input"
+          v-model="user.message"
+      >
+    </div>
+    <div class="form-group">
+      <label for="messageType" class="form-label">Тип обращения:</label>
+      <select id="messageType" class="form-input">
+        <option>Жалоба на пользователя</option>
+        <option>Жалоба на приложение</option>
+        <option>Жалоба на сайт</option>
+        <option>Оплата</option>
+        <option>Функционал</option>
+        <option>Авторизация</option>
+        <option>Модерация</option>
+        <option>Другое</option>
       </select>
-      <input type="text" placeholder="priority" v-model="user.priority">
-      <select v-model="filter">
-        <option value="low">Низкий</option>
-        <option value="medium">Средний</option>
-        <option value="high">Высокий</option>
-        <option value="critical">Критический</option>
+    </div>
+    <div class="form-group">
+      <label for="priority" class="form-label">Приоритет:</label>
+      <select id="priority" class="form-input">
+        <option>Низкий</option>
+        <option>Средний</option>
+        <option>Высокий</option>
+        <option>Критический</option>
       </select>
-      <input type="text" placeholder="status" v-model="user.status">
-      <select v-model="filter">
-        <option value="new">Новый</option>
-        <option value="in-processing">В обработке</option>
-        <option value="postponed">Отложено</option>
-        <option value="closed">Закрыто</option>
+    </div>
+    <div class="form-group">
+      <label for="status" class="form-label">Статус:</label>
+      <select id="status" class="form-input">
+        <option>Новый</option>
+        <option>В обработке</option>
+        <option>Отложено</option>
+        <option>Закрыто</option>
       </select>
-    </ul>
-    <hr>
-    <button type="submit" v-on:change="">Create</button>
+    </div>
+    <button type="submit" class="form-btn-create" v-on:change="">Создать</button>
+    <button type="reset" class="form-btn-cancel" v-on:change="">Отмена</button>
 
   </form>
 </template>
@@ -88,38 +101,51 @@ form {
   margin-bottom: 10px;
 }
 
-ul {
-  list-style: none;
+.form-group {
+  position: relative;
 }
 
-input {
+.form-input {
   position: relative;
-  display: block;
-  width: 400px;
+  /*display: block;*/
+  width: 900px;
   border: 1px solid #ccc;
   border-radius: 2px;
-  /*box-sizing: border-box;*/
+  box-sizing: border-box;
   padding: 10px;
-  margin: 10px;
+  margin-bottom: 25px;
 }
 
-label {
+.form-label {
   position: absolute;
-  /*top: 0;*/
   left: 0;
-  color: red;
+  top: -18px;
+  font-size: 14px;
+  color: #a4a8b1;
 }
 
 
-button {
+.form-btn-create {
+  margin-right: 10px;
+  min-width: 95px;
+  height: 35px;
   background-color: #78cd51;
   border: none;
-  border-radius: 10px;
+  border-radius: 5px;
+  box-shadow: 0 10px 25px rgba(148, 174, 213, 0.15);
+}
+
+.form-btn-cancel {
+  background-color: #f67a6e;
+  min-width: 95px;
+  height: 35px;
+  border: none;
+  border-radius: 5px;
   box-shadow: 0 10px 25px rgba(148, 174, 213, 0.15);
 }
 
 button:hover {
-  transform: scale(1.35);
+  transform: scale(1.05);
   transition: all 0.5s;
 }
 
