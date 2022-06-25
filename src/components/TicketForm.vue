@@ -6,7 +6,7 @@
       <input
           id="name"
           class="form-input"
-          v-model="user.name"
+          v-model.trim="name"
       >
     </div>
     <div class="form-group">
@@ -14,7 +14,7 @@
       <input
           id="email"
           class="form-input"
-          v-model="user.email"
+          v-model.trim="email"
       >
     </div>
     <div class="form-group">
@@ -22,38 +22,40 @@
       <input
           id="message"
           class="form-input"
-          v-model="user.message"
+          v-model.trim="message"
       >
     </div>
     <div class="form-group">
       <label for="messageType" class="form-label">Тип обращения:</label>
       <select id="messageType" class="form-input">
-        <option>Жалоба на пользователя</option>
-        <option>Жалоба на приложение</option>
-        <option>Жалоба на сайт</option>
-        <option>Оплата</option>
-        <option>Функционал</option>
-        <option>Авторизация</option>
-        <option>Модерация</option>
-        <option>Другое</option>
+        <option
+            v-for="(messageType, index) in messagesTypes"
+            :key="index"
+        >
+          {{ messageType.label }}
+        </option>
       </select>
     </div>
     <div class="form-group">
       <label for="priority" class="form-label">Приоритет:</label>
       <select id="priority" class="form-input">
-        <option>Низкий</option>
-        <option>Средний</option>
-        <option>Высокий</option>
-        <option>Критический</option>
+        <option
+            v-for="(priority, index) in priorities"
+            :key="index"
+        >
+          {{ priority.label }}
+        </option>
       </select>
     </div>
     <div class="form-group">
       <label for="status" class="form-label">Статус:</label>
       <select id="status" class="form-input">
-        <option>Новый</option>
-        <option>В обработке</option>
-        <option>Отложено</option>
-        <option>Закрыто</option>
+        <option
+            v-for="(status, index) in statuses"
+            :key="index"
+        >
+          {{ status.label }}
+        </option>
       </select>
     </div>
     <button type="submit" class="form-btn-create" v-on:change="">Создать</button>
@@ -67,7 +69,79 @@
 export default {
   data() {
     return {
-      user: ''
+      name: '',
+      email: '',
+      message: '',
+      messagesTypes: [
+        {
+          label: 'Жалоба на пользователя',
+          value: 'Complaint-user'
+        },
+        {
+          label: 'Жалоба на приложение',
+          value: 'Complaint-app'
+        },
+        {
+          label: 'Жалоба на сайт',
+          value: 'Complaint-website'
+        },
+        {
+          label: 'Оплата',
+          value: 'Payment'
+        },
+        {
+          label: 'Функционал',
+          value: 'Functionality'
+        },
+        {
+          label: 'Авторизация',
+          value: 'Authorization'
+        },
+        {
+          label: 'Модерация',
+          value: 'Moderation'
+        },
+        {
+          label: 'Другое',
+          value: 'Other'
+        },
+      ],
+      priorities: [
+        {
+          label: 'Низкий',
+          value: 'Low'
+        },
+        {
+          label: 'Средний',
+          value: 'Medium'
+        },
+        {
+          label: 'Высокий',
+          value: 'High'
+        },
+        {
+          label: 'Критический',
+          value: 'Critical'
+        },
+      ],
+      statuses: [
+        {
+          label: 'Новый',
+          value: 'New'
+        },
+        {
+          label: 'В обработке',
+          value: 'in-processing'
+        },
+        {
+          label: 'Отложено',
+          value: 'Postponed'
+        },
+        {
+          label: 'Закрыто',
+          value: 'Closed'
+        },
+      ]
     }
   },
   methods: {
