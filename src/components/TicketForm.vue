@@ -6,15 +6,18 @@
       <input
           id="name"
           class="form-input"
-          v-model.trim="name"
+          :class="$v.form.name.$error ? 'is-invalid' : ''"
+          v-model.trim="form.name"
       >
+<!--      <p v-if="$v.name.$dirty && $v.name.required" class="invalid-feedback">Обязательное поле</p>-->
+<!--      <p v-if="$v.name.$dirty && $v.name.minLength" class="invalid-feedback">Здесь должно быть больше 5-и символов</p>-->
     </div>
     <div class="form-group">
       <label for="email" class="form-label">Email:</label>
       <input
           id="email"
           class="form-input"
-          v-model.trim="email"
+          v-model.trim="form.email"
       >
     </div>
     <div class="form-group">
@@ -22,14 +25,15 @@
       <input
           id="message"
           class="form-input"
-          v-model.trim="message"
+          v-model.trim="form.message"
       >
     </div>
     <div class="form-group">
       <label for="messageType" class="form-label">Тип обращения:</label>
-      <select id="messageType" class="form-input">
+      <select id="messageType" class="form-input" v-model="form.messageType">
         <option
             v-for="(messageType, index) in messagesTypes"
+            :value="messageType.value"
             :key="index"
         >
           {{ messageType.label }}
@@ -38,9 +42,10 @@
     </div>
     <div class="form-group">
       <label for="priority" class="form-label">Приоритет:</label>
-      <select id="priority" class="form-input">
+      <select id="priority" class="form-input" v-model="form.priority">
         <option
             v-for="(priority, index) in priorities"
+            :value="priority.value"
             :key="index"
         >
           {{ priority.label }}
@@ -49,9 +54,10 @@
     </div>
     <div class="form-group">
       <label for="status" class="form-label">Статус:</label>
-      <select id="status" class="form-input">
+      <select id="status" class="form-input" v-model="form.status">
         <option
             v-for="(status, index) in statuses"
+            :value="status.value"
             :key="index"
         >
           {{ status.label }}
@@ -65,13 +71,20 @@
 </template>
 
 <script>
+import {validationMixin} from 'vuelidate'
+import {required, minLength, email} from 'vuelidate/lib/validators'
 
 export default {
+  mixins: [validationMixin],
   data() {
     return {
-      name: '',
-      email: '',
-      message: '',
+      form: {
+        name: '',
+        email: '',
+        message: '',
+        messageType: 'Complaint-user',
+      },
+
       messagesTypes: [
         {
           label: 'Жалоба на пользователя',
@@ -106,6 +119,7 @@ export default {
           value: 'Other'
         },
       ],
+      priority: 'Low',
       priorities: [
         {
           label: 'Низкий',
@@ -124,6 +138,7 @@ export default {
           value: 'Critical'
         },
       ],
+      status: 'New',
       statuses: [
         {
           label: 'Новый',
@@ -144,35 +159,52 @@ export default {
       ]
     }
   },
-  methods: {
-    onSubmit() {
-      if (this.user.trim()) {
-        const addTicket = {
-          ticket_number: Date.now(),
-          // ticket: this.ticket,
-          user: this.user,
-          // completed: false
-        }
-        this.$emit('add-ticket', addTicket)
-        this.user = ''
-      }
+  validations: {
+    form: {
+      name: {required, minLength: minLength(5)},
+      email: {required, email}
     }
   },
-  addTicket() {
-    console.log('LOG')
-    console.log(user)
-    this.tickets.push(user)
+  // this.$v.form.$touch(),
+  methods: {
+    onSubmit() {
+      this.$v.form.$touch()
+      if (!this.$v.form.$error) {
+        console.log('Валидация прошла успешно')
+        //   const addTicket = {
+        //     ticket_number: Date.now(),
+        //     // ticket: this.ticket,
+        //     user: this.user,
+        //     // completed: false
+        //   }
+        //   this.$emit('add-ticket', addTicket)
+        //   this.user = ''
+      }
+    }
   }
+  // addTicket() {
+  //   console.log('LOG')
+  //   console.log(user)
+  //   this.tickets.push(user)
+  // }
 }
 </script>
 
 <style scoped>
+h2 {
+  margin-right: auto;
+}
+
 form {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
+  margin: 0 auto;
   flex-wrap: wrap;
-  width: 400px;
+  width: 900px;
   margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
 }
 
 .form-group {
@@ -207,6 +239,8 @@ form {
   border: none;
   border-radius: 5px;
   box-shadow: 0 10px 25px rgba(148, 174, 213, 0.15);
+  /*justify-content: flex-start;*/
+  /*margin-right: auto;*/
 }
 
 .form-btn-cancel {
@@ -216,6 +250,7 @@ form {
   border: none;
   border-radius: 5px;
   box-shadow: 0 10px 25px rgba(148, 174, 213, 0.15);
+  /*margin-right: auto;*/
 }
 
 button:hover {
