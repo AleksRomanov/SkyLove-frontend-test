@@ -4,9 +4,11 @@
     <div class="ticket-user__name">
       <img width="45" height="45" src="https://lh3.googleusercontent.com/ogw/ADGmqu9mwjd_DnKM_J5VCm0fPeUuIA1p-MU6rR7Fi0wV=s192-c-mo" alt=""/>
       <span>{{ ticket.user.name }}</span>
+      <span>{{ ticket.user.email }}</span>
+      <p>{{ ticket.user.message }}</p>
+
       <div class="ticket-user__data">
         <span>{{ ticket.body_subject }}</span>
-        <p>{{ ticket.message }}</p>
       </div>
       <!--      <strong>{{ ticket.user.email }}</strong>-->
     </div>
@@ -23,7 +25,9 @@ export default {
       type: Object,
       required: true,
     },
-    index: Number
+    index: {
+      type: Number
+    }
   },
   filters: {
     uppercase(value) {

@@ -1,10 +1,11 @@
 <template>
   <div>
     <router-link to="/home">Home</router-link>
+    <button type="submit" class="ticket-btn-create">Создать</button>
     <TicketForm
-        @add-ticket="addTicket"
+        @user-submitted="addTicket"
     />
-    <Loader v-if="loading"/>
+    <!--    <Loader v-if="loading"/>-->
     <TicketList
         v-if="tickets.length"
         v-bind:tickets="tickets"
@@ -17,7 +18,7 @@
 <script>
 import TicketList from '@/components/TicketList'
 import TicketForm from "@/components/TicketForm";
-import Loader from "@/components/Loader";
+// import Loader from "@/components/Loader";
 
 export default {
   name: 'Tickets',
@@ -28,7 +29,7 @@ export default {
           "user": {
             "name": "Василий Васильев",
             "email": "vasya@gmail.com",
-            "avatar": "https://lh3.googleusercontent.com/ogw/ADGmqu9mwjd_DnKM_J5VCm0fPeUuIA1p-MU6rR7Fi0wV=s192-c-mo"
+            "message": "1111"
           },
           "body_subject": "text text",
           "subject": "Оплата",
@@ -40,7 +41,7 @@ export default {
           "user": {
             "name": "Пашка Классный",
             "email": "pasha@gmail.com",
-            "avatar": "https://lh3.googleusercontent.com/ogw/ADGmqu9mwjd_DnKM_J5VCm0fPeUuIA1p-MU6rR7Fi0wV=s192-c-mo"
+            "message": "2222"
           },
           "body_subject": "text text",
           "subject": "Оплата",
@@ -52,7 +53,7 @@ export default {
           "user": {
             "name": "Жека Воробьев",
             "email": "jeka@gmail.com",
-            "avatar": "https://lh3.googleusercontent.com/ogw/ADGmqu9mwjd_DnKM_J5VCm0fPeUuIA1p-MU6rR7Fi0wV=s192-c-mo"
+            "message": "33333"
           },
           "body_subject": "Тип обращения",
           "subject": "Оплата",
@@ -65,26 +66,44 @@ export default {
     }
   },
   computed: {
-    filteredMessageType() {
-      if (this.filter === 'complaint-user') {
-        return this.tickets
-      }
-    }
+    // filteredMessageType() {
+    //   if (this.filter === 'complaint-user') {
+    //     return this.tickets
+    //   }
+    // }
   },
   methods: {
     removeTicket(ticket_number) {
       this.tickets = this.tickets.filter(i => i.ticket_number !== ticket_number)
     },
     addTicket(user) {
-      console.log('LOG')
-      console.log(user)
       this.tickets.push(user)
     }
   },
   components: {
     TicketForm,
     TicketList,
-    Loader
+    // Loader
   }
 }
 </script>
+
+<style>
+
+.ticket-btn-create {
+  cursor: pointer;
+  display: block;
+  /*margin: 0 auto;*/
+  margin: 0 auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  min-width: 95px;
+  height: 35px;
+  background-color: #78cd51;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 10px 25px rgba(148, 174, 213, 0.15);
+  /*justify-content: flex-start;*/
+  /*margin-right: auto;*/
+}
+</style>

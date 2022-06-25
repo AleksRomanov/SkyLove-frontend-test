@@ -6,11 +6,9 @@
       <input
           id="name"
           class="form-input"
-          :class="$v.form.name.$error ? 'is-invalid' : ''"
           v-model.trim="form.name"
       >
-<!--      <p v-if="$v.name.$dirty && $v.name.required" class="invalid-feedback">Обязательное поле</p>-->
-<!--      <p v-if="$v.name.$dirty && $v.name.minLength" class="invalid-feedback">Здесь должно быть больше 5-и символов</p>-->
+
     </div>
     <div class="form-group">
       <label for="email" class="form-label">Email:</label>
@@ -64,27 +62,29 @@
         </option>
       </select>
     </div>
-    <button type="submit" class="form-btn-create" v-on:change="">Создать</button>
-    <button type="reset" class="form-btn-cancel" v-on:change="">Отмена</button>
+    <button type="submit" class="form-btn-create">Создать</button>
+    <button type="reset" class="form-btn-cancel">Отмена</button>
 
   </form>
 </template>
 
 <script>
-import {validationMixin} from 'vuelidate'
-import {required, minLength, email} from 'vuelidate/lib/validators'
+// import {validationMixin} from 'vuelidate'
+// import {required, minLength, email} from 'vuelidate/lib/validators'
+
+import tickets from "@/views/Tickets";
 
 export default {
-  mixins: [validationMixin],
+  // mixins: [validationMixin],
   data() {
     return {
+      tickets: [],
       form: {
         name: '',
         email: '',
         message: '',
         messageType: 'Complaint-user',
       },
-
       messagesTypes: [
         {
           label: 'Жалоба на пользователя',
@@ -159,34 +159,29 @@ export default {
       ]
     }
   },
-  validations: {
-    form: {
-      name: {required, minLength: minLength(5)},
-      email: {required, email}
-    }
-  },
-  // this.$v.form.$touch(),
+  // validations: {
+  //   form: {
+  //     name: {required, minLength: minLength(5)},
+  //     email: {required, email}
+  //   }
+  // },
   methods: {
     onSubmit() {
-      this.$v.form.$touch()
-      if (!this.$v.form.$error) {
-        console.log('Валидация прошла успешно')
-        //   const addTicket = {
-        //     ticket_number: Date.now(),
-        //     // ticket: this.ticket,
-        //     user: this.user,
-        //     // completed: false
-        //   }
-        //   this.$emit('add-ticket', addTicket)
-        //   this.user = ''
+      const addTicket = {
+        user: {
+          name: this.form.name,
+          email: this.form.email,
+          message: this.form.message
+        },
+
       }
+      this.$emit('user-submitted', addTicket)
+      this.form.name = ''
+      this.form.email = ''
+      this.form.message = ''
     }
   }
-  // addTicket() {
-  //   console.log('LOG')
-  //   console.log(user)
-  //   this.tickets.push(user)
-  // }
+
 }
 </script>
 
@@ -197,6 +192,7 @@ h2 {
 
 form {
   display: flex;
+  /*display: none;*/
   justify-content: center;
   margin: 0 auto;
   flex-wrap: wrap;
@@ -232,6 +228,7 @@ form {
 
 
 .form-btn-create {
+  cursor: pointer;
   margin-right: 10px;
   min-width: 95px;
   height: 35px;
@@ -244,6 +241,7 @@ form {
 }
 
 .form-btn-cancel {
+  cursor: pointer;
   background-color: #f67a6e;
   min-width: 95px;
   height: 35px;

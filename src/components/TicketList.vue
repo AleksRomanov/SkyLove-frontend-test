@@ -2,10 +2,10 @@
   <div>
     <ul>
       <TicketItem
-          v-for="(ticket, i) in tickets" :key="ticket"
-          v-bind:ticket="ticket"
-          v-bind:index="i"
-          v-on:remove-ticket="removeTicket"
+          v-for="(ticket, idx) in tickets" :key="idx"
+          :ticket="ticket"
+          :index="idx"
+          @remove-ticket="removeTicket"
       />
     </ul>
   </div>
@@ -14,19 +14,19 @@
 <script>
 import TicketItem from '@/components/TicketItem'
 export default {
-  props: ['tickets'],
   components: {
     TicketItem
   },
+  props: ['tickets'],
   methods: {
     removeTicket(ticket_number) {
       this.$emit('remove-ticket', ticket_number)
     },
-    addTicket(user) {
-      this.tickets.push(user)
-      console.log('LLLLOOOGGGGGGG!!!!')
-      console.log(user)
-    }
+    // addTicket(user) {
+    //   this.tickets.push(user)
+    //   console.log('LLLLOOOGGGGGGG!!!!')
+    //   console.log(user)
+    // }
   }
 }
 </script>
