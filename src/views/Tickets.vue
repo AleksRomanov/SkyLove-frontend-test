@@ -1,7 +1,12 @@
 <template>
   <div>
     <router-link to="/home">Home</router-link>
-    <button type="submit" class="ticket-btn-create">Создать</button>
+
+
+    <button @submit="showForm" :key="showForm" type="submit" class="ticket-btn-create">Создать</button>
+<!--    <button v-on:click="$emit('showForm')" type="submit" class="ticket-btn-create">Создать</button>-->
+
+
     <TicketForm
         @user-submitted="addTicket"
     />
@@ -29,55 +34,48 @@ export default {
           "user": {
             "name": "Василий Васильев",
             "email": "vasya@gmail.com",
-            "message": "1111"
+            "message": "Отвратительно!!!"
           },
-          "body_subject": "text text",
-          "subject": "Оплата",
+          "messageType": 'Жалоба на пользователя',
           "status": 0,
           "priority": 2,
-          "ticket_number": 1
+          "ticket_number": '1'
         },
         {
           "user": {
             "name": "Пашка Классный",
             "email": "pasha@gmail.com",
-            "message": "2222"
+            "message": "Это лучшее приложение!"
           },
-          "body_subject": "text text",
           "subject": "Оплата",
           "status": 1,
           "priority": 3,
-          "ticket_number": 2
+          "ticket_number": '2'
         },
         {
           "user": {
             "name": "Жека Воробьев",
             "email": "jeka@gmail.com",
-            "message": "33333"
+            "message": "Лучшие!!"
           },
-          "body_subject": "Тип обращения",
-          "subject": "Оплата",
           "status": 3,
           "priority": 5,
-          "ticket_number": 3
+          "ticket_number": '3'
         },
       ],
       loading: true
     }
   },
-  computed: {
-    // filteredMessageType() {
-    //   if (this.filter === 'complaint-user') {
-    //     return this.tickets
-    //   }
-    // }
-  },
+  computed: {},
   methods: {
     removeTicket(ticket_number) {
       this.tickets = this.tickets.filter(i => i.ticket_number !== ticket_number)
     },
     addTicket(user) {
       this.tickets.push(user)
+    },
+    showForm(event) {
+      event.target.classList.add('formShow')
     }
   },
   components: {
@@ -90,10 +88,21 @@ export default {
 
 <style>
 
+.formShow {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  width: 900px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+}
+
 .ticket-btn-create {
   cursor: pointer;
   display: block;
-  /*margin: 0 auto;*/
   margin: 0 auto;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -103,7 +112,5 @@ export default {
   border: none;
   border-radius: 5px;
   box-shadow: 0 10px 25px rgba(148, 174, 213, 0.15);
-  /*justify-content: flex-start;*/
-  /*margin-right: auto;*/
 }
 </style>

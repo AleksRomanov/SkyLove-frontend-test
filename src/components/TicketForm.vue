@@ -172,6 +172,7 @@ export default {
           name: this.form.name,
           email: this.form.email,
           message: this.form.message
+
         },
 
       }
@@ -191,16 +192,7 @@ h2 {
 }
 
 form {
-  display: flex;
-  /*display: none;*/
-  justify-content: center;
-  margin: 0 auto;
-  flex-wrap: wrap;
-  width: 900px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  padding: 20px;
+  display: none;
 }
 
 .form-group {

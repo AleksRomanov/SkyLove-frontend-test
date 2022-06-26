@@ -1,16 +1,15 @@
 <template>
   <li>
     {{ index + 1 }}
+    {{ticket.priority}}
     <div class="ticket-user__name">
       <img width="45" height="45" src="https://lh3.googleusercontent.com/ogw/ADGmqu9mwjd_DnKM_J5VCm0fPeUuIA1p-MU6rR7Fi0wV=s192-c-mo" alt=""/>
       <span>{{ ticket.user.name }}</span>
       <span>{{ ticket.user.email }}</span>
-      <p>{{ ticket.user.message }}</p>
-
+      <p>Тип сообщения:{{ ticket.messageType }}</p>
       <div class="ticket-user__data">
-        <span>{{ ticket.body_subject }}</span>
+        <span>{{ ticket.user.message }}</span>
       </div>
-      <!--      <strong>{{ ticket.user.email }}</strong>-->
     </div>
     <button class="rm"
             v-on:click="$emit('remove-ticket', ticket.ticket_number)">&times;
