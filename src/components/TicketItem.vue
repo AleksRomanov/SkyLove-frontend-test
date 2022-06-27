@@ -1,6 +1,6 @@
 <template>
   <li>
-    {{ index + 1 }}
+<!--    {{ index + 1 }}-->
     {{ticket.priority}}
     <div class="ticket-user__name">
       <img width="45" height="45" src="https://lh3.googleusercontent.com/ogw/ADGmqu9mwjd_DnKM_J5VCm0fPeUuIA1p-MU6rR7Fi0wV=s192-c-mo" alt=""/>

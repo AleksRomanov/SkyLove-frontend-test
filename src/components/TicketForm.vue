@@ -1,83 +1,79 @@
-<template>
-  <form @submit.prevent="onSubmit">
-    <h2>Новый тикет</h2>
-    <div class="form-group">
-      <label for="name" class="form-label">Имя:</label>
-      <input
-          id="name"
-          class="form-input"
-          v-model.trim="form.name"
-      >
+<template v-if="visible">
+  <form :class="{formShow: visible}" @submit.prevent="onSubmit">
+    <div class="form-wrapper">
+      <h2>Новый тикет</h2>
+      <div class="form-group">
+        <label for="name" class="form-label">Имя:</label>
+        <input
+            id="name"
+            class="form-input"
+            v-model.trim="form.name"
+        >
 
-    </div>
-    <div class="form-group">
-      <label for="email" class="form-label">Email:</label>
-      <input
-          id="email"
-          class="form-input"
-          v-model.trim="form.email"
-      >
-    </div>
-    <div class="form-group">
-      <label for="message" class="form-label">Сообщение:</label>
-      <input
-          id="message"
-          class="form-input"
-          v-model.trim="form.message"
-      >
-    </div>
-    <div class="form-group">
-      <label for="messageType" class="form-label">Тип обращения:</label>
-      <select id="messageType" class="form-input" v-model="form.messageType">
-        <option
-            v-for="(messageType, index) in messagesTypes"
-            :value="messageType.value"
-            :key="index"
+      </div>
+      <div class="form-group">
+        <label for="email" class="form-label">Email:</label>
+        <input
+            id="email"
+            class="form-input"
+            v-model.trim="form.email"
         >
-          {{ messageType.label }}
-        </option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="priority" class="form-label">Приоритет:</label>
-      <select id="priority" class="form-input" v-model="form.priority">
-        <option
-            v-for="(priority, index) in priorities"
-            :value="priority.value"
-            :key="index"
+      </div>
+      <div class="form-group">
+        <label for="message" class="form-label">Сообщение:</label>
+        <input
+            id="message"
+            class="form-input"
+            v-model.trim="form.message"
         >
-          {{ priority.label }}
-        </option>
-      </select>
+      </div>
+      <div class="form-group">
+        <label for="messageType" class="form-label">Тип обращения:</label>
+        <select id="messageType" class="form-input" v-model="form.messageType">
+          <option
+              v-for="(messageType, index) in messagesTypes"
+              :value="messageType.value"
+              :key="index"
+          >
+            {{ messageType.label }}
+          </option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="priority" class="form-label">Приоритет:</label>
+        <select id="priority" class="form-input" v-model="form.priority">
+          <option
+              v-for="(priority, index) in priorities"
+              :value="priority.value"
+              :key="index"
+          >
+            {{ priority.label }}
+          </option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="status" class="form-label">Статус:</label>
+        <select id="status" class="form-input" v-model="form.status">
+          <option
+              v-for="(status, index) in statuses"
+              :value="status.value"
+              :key="index"
+          >
+            {{ status.label }}
+          </option>
+        </select>
+      </div>
+      <button type="submit" class="form-btn-create">Создать</button>
+      <button @click="hideForm" ref="hideForm" type="reset" class="form-btn-cancel">Отмена</button>
     </div>
-    <div class="form-group">
-      <label for="status" class="form-label">Статус:</label>
-      <select id="status" class="form-input" v-model="form.status">
-        <option
-            v-for="(status, index) in statuses"
-            :value="status.value"
-            :key="index"
-        >
-          {{ status.label }}
-        </option>
-      </select>
-    </div>
-    <button type="submit" class="form-btn-create">Создать</button>
-    <button type="reset" class="form-btn-cancel">Отмена</button>
-
   </form>
 </template>
-
 <script>
-// import {validationMixin} from 'vuelidate'
-// import {required, minLength, email} from 'vuelidate/lib/validators'
-
-import tickets from "@/views/Tickets";
 
 export default {
-  // mixins: [validationMixin],
   data() {
     return {
+      visible: null,
       tickets: [],
       form: {
         name: '',
@@ -159,12 +155,6 @@ export default {
       ]
     }
   },
-  // validations: {
-  //   form: {
-  //     name: {required, minLength: minLength(5)},
-  //     email: {required, email}
-  //   }
-  // },
   methods: {
     onSubmit() {
       const addTicket = {
@@ -172,23 +162,41 @@ export default {
           name: this.form.name,
           email: this.form.email,
           message: this.form.message
-
         },
-
       }
       this.$emit('user-submitted', addTicket)
       this.form.name = ''
       this.form.email = ''
       this.form.message = ''
+    },
+    hideForm() {
+      this.visible = !this.visible
     }
+  },
+  mounted() {
+    this.$root.$on('showForm', value => {
+      this.visible = value
+    })
   }
-
 }
 </script>
 
 <style scoped>
 h2 {
   margin-right: auto;
+}
+
+.form-wrapper {
+  display: flex;
+  background-color: white;
+  justify-content: center;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  width: 900px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  padding: 20px;
+  z-index: 11;
 }
 
 form {
@@ -201,7 +209,6 @@ form {
 
 .form-input {
   position: relative;
-  /*display: block;*/
   width: 900px;
   border: 1px solid #ccc;
   border-radius: 2px;
@@ -228,8 +235,6 @@ form {
   border: none;
   border-radius: 5px;
   box-shadow: 0 10px 25px rgba(148, 174, 213, 0.15);
-  /*justify-content: flex-start;*/
-  /*margin-right: auto;*/
 }
 
 .form-btn-cancel {
@@ -240,7 +245,6 @@ form {
   border: none;
   border-radius: 5px;
   box-shadow: 0 10px 25px rgba(148, 174, 213, 0.15);
-  /*margin-right: auto;*/
 }
 
 button:hover {

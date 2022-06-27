@@ -1,14 +1,10 @@
 <template>
   <div>
     <router-link to="/home">Home</router-link>
-
-
-    <button @submit="showForm" :key="showForm" type="submit" class="ticket-btn-create">Создать</button>
-<!--    <button v-on:click="$emit('showForm')" type="submit" class="ticket-btn-create">Создать</button>-->
-
-
-    <TicketForm
-        @user-submitted="addTicket"
+    <button @click="showForm" class="ticket-btn-create">Создать Тикет</button>
+    <TicketForm ref="formShow"
+                @user-submitted="addTicket"
+                :isVisible="isVisible"
     />
     <!--    <Loader v-if="loading"/>-->
     <TicketList
@@ -63,7 +59,8 @@ export default {
           "ticket_number": '3'
         },
       ],
-      loading: true
+      loading: true,
+      isVisible: false
     }
   },
   computed: {},
@@ -74,8 +71,10 @@ export default {
     addTicket(user) {
       this.tickets.push(user)
     },
-    showForm(event) {
-      event.target.classList.add('formShow')
+    showForm() {
+      this.$root.$emit('showForm', !this.isVisible)
+      // this.$refs.formShow.$el.classList.add('formShow')
+      // console.dir(this.$refs.formShow)
     }
   },
   components: {
@@ -86,18 +85,27 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 .formShow {
   display: flex;
-  justify-content: center;
   margin: 0 auto;
-  flex-wrap: wrap;
   width: 900px;
-  margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 10px;
-  padding: 20px;
+  z-index: 10;
+}
+
+.formShow:before {
+  content: '';
+  position: fixed;
+  transform: translateX(-50%) translateY(-50%);
+  left: 50%;
+  top: 50%;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 0;
 }
 
 .ticket-btn-create {
